@@ -4,6 +4,7 @@
   
   <script>
   import AMapLoader from '@amap/amap-jsapi-loader'
+  import bus from '@/bus/bus'
   window._AMapSecurityConfig = {
     securityJsCode: 'eba10de53cfdb8b308b8ccc2f1da70fe'
   }
@@ -21,7 +22,7 @@
         polygons: [],
         showHeatOrNot: false,
         heatmap: null,
-        heatmapList: null
+        heatmapList: []
       }
     },
     methods: {
@@ -209,13 +210,13 @@
       this.initMap()
     },
     created() {
-    //   bus.$on('shareUserInput', val => {
-    //     this.autoOptions.input = val.inputId
-    //     this.searchPlaceInput = val.userInput
-    //   })
-    //   bus.$on('shareHeatMapShow', val => {
-    //     this.showHeatOrNot = val
-    //   })
+      bus.$on('shareSearchData', val => {
+        this.autoOptions.input = val.inputId
+        this.searchPlaceInput = val.userInput
+      })
+      bus.$on('shareHeatMapShow', val => {
+        this.showHeatOrNot = val
+      })
     },
     watch: {
       searchPlaceInput(newValue) {
@@ -230,7 +231,16 @@
         if (newValue) {
           this.showHeatMap()
         } else {
-          this.heatmap.hide()
+          // Hide and clear all heatmaps
+          if (this.heatmap) {
+            this.heatmap.hide()
+          }
+          if (this.heatmapList && this.heatmapList.length) {
+            this.heatmapList.forEach(heatmap => {
+              heatmap.hide()
+            })
+            this.heatmapList = [] // Clear the array
+          }
         }
       }
     }

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Monitoring from '@/components/Monitoring.vue'
+import MinIO from '@/components/MinIO.vue'
+import Dialog from '@/components/Dialog.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +12,21 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/monitoring',
+    name: 'monitoring',
+    component: Monitoring
+  },
+  {
+    path: '/minio',
+    name: 'minio',
+    component: MinIO
+  },
+  {
+    path: '/dialog',
+    name: 'dialog',
+    component: Dialog
   },
   {
     path: '/about',

@@ -7,7 +7,7 @@
   </template>
   
   <script>
-//   import bus from '@/bus/bus'
+  import bus from '@/bus/bus'
   export default {
     data() {
       return {
@@ -19,7 +19,7 @@
     },
     methods: {
       send() {
-        // bus.$emit('shareUserInput', this.inputObject)
+        bus.$emit('shareSearchData', this.inputObject)
       }
     },
     mounted() {

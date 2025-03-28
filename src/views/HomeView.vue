@@ -15,6 +15,7 @@
 // @ is an alias to /src
 import MapContainer from '@/components/container/MapContainer.vue'
 import Search from '@/components/search/Search.vue'
+import bus from '@/bus/bus';
 export default {
   name: 'HomeView',
   components: {
